@@ -8,6 +8,7 @@
 | 难以判断哪个车位合适 | 在进入比如商业中心的地下停车场时，司机也许具备去某个指定店铺或者区域的需求，但是地下停车场的标识通常很难判断自己所找的位置是否合适                                 | 使用AI模型能够帮助司机根据目的地找到最合适的停车位           |
 | 停车场管理困难       | 目前传统停车场管理能够做到的统计基本上就是场内车辆数量统计以及监控，但这并不能完全令人满意                                                                         | AI模型统计能够实时监控到停车场内的每辆车，达到精细管理的目标 |
 | 其他需求             | 除上述之外还有一些简单需求比如用户会忘记自己车停在哪了等，这些问题用传统的方式也可以解决                                                                           | 但是使用AI系统能够将大大小小的功能集中到一起，方便用户使用   | 
+
 综合上述需求及分析，我们认为一个智能停车场系统能够有效解决司机和停车场管理方在使用和管理停车场时所遇到的问题。
 ### Augmentation versus Automation
 智能停车场系统主要有两方面的用户，分别是进入停车场的**司机**和停车场的**管理方**。
@@ -21,12 +22,14 @@
 | -------- |----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
 | Positive |                **TP** <br/> 引导到了司机满意且最为合适的车位                 | **FN** <br/> 车位选择不够好，车位可能不是最优的或者不能令司机用户满意 <br/> 路径选择有问题，绕路或进行了错误引导 <br/> 引导到了已经停了车的错误车位 |
 | Negative | **FP** <br/> 系统略过了良好的停车位 <br/> 系统对某些合适的停车位却提示不合适 |                                                   **TN** <br/> 判断出某些车位不适合司机选择并合理提醒                                                   | 
+
 关于车位引导功能的结论：Our AI model will be optimized for **precision**, because drivers have the ability to make judgments and determine whether a parking space is suitable, however, it can be quite troublesome if the system guides the driver to the wrong parking spot. We understand that the tradeoff for choosing this method means our model will be more likely to provide available but suboptimal guidance suggestions.
 
 |          | Positive                                      | Negative                                      |
 | -------- | --------------------------------------------- | --------------------------------------------- |
 | Positive | **TP** <br/> 正确追踪指定车辆（车牌指定）         | **FN** <br/> 指定车辆未被还在停车场内但未被追踪到 |
 | Negative | **FP** <br/> 追踪到了错误的车辆或者其他错误的目标 | **TN** <br/> 追踪指定车辆时仅获取正确车辆信息，其他车辆都被识别为负样本                                              |
+
 关于管理方车辆追踪功能的结论：Our AI model will be optimized for **recall**, because the problem of untracked vehicles can be compensated by multiple detections, but if the wrong vehicle is tracked, it can likely cause unnecessary trouble. We understand that the tradeoff for choosing this method means our model will be more prone to missed detections.
 ### Define Success Criteria
 针对我们的智能停车场系统，我们设计了一下的几个success criteria：
